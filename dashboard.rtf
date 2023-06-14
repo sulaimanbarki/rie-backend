@@ -1,0 +1,448 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 -- phpMyAdmin SQL Dump\
+-- version 4.9.7\
+-- https://www.phpmyadmin.net/\
+--\
+-- Host: localhost:8889\
+-- Generation Time: Jun 30, 2021 at 04:09 PM\
+-- Server version: 5.7.32\
+-- PHP Version: 8.0.0\
+\
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";\
+SET time_zone = "+00:00";\
+\
+--\
+-- Database: `ziplogy`\
+--\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `admin_permission`\
+--\
+\
+CREATE TABLE `admin_permission` (\
+  `permission_id` int(11) NOT NULL,\
+  `permission_title` varchar(100) NOT NULL,\
+  `permission_value` varchar(100) NOT NULL,\
+  `permission_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `admin_permission`\
+--\
+\
+INSERT INTO `admin_permission` (`permission_id`, `permission_title`, `permission_value`, `permission_status`, `created_at`, `updated_at`) VALUES\
+(1, 'Read', 'read', 1, '2021-06-09 09:48:32', NULL),\
+(2, 'Write', 'write', 1, '2021-06-09 09:48:46', NULL),\
+(3, 'Edit', 'edit', 1, '2021-06-09 09:49:05', NULL),\
+(4, 'Delete', 'delete', 1, '2021-06-09 09:49:13', NULL);\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `admin_profile`\
+--\
+\
+CREATE TABLE `admin_profile` (\
+  `adprofile_id` int(11) NOT NULL,\
+  `aduser_id` int(11) NOT NULL,\
+  `adprofile_city` varchar(100) NOT NULL,\
+  `adprofile_country` varchar(100) NOT NULL,\
+  `adprofile_avatar` varchar(100) DEFAULT NULL,\
+  `adprofile_bio` text NOT NULL,\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `admin_profile`\
+--\
+\
+INSERT INTO `admin_profile` (`adprofile_id`, `aduser_id`, `adprofile_city`, `adprofile_country`, `adprofile_avatar`, `adprofile_bio`, `created_at`, `updated_at`) VALUES\
+(2, 5, 'Mardan', '23200', NULL, 'A test bio', '2021-06-14 01:53:03', '2021-06-23 01:12:23'),\
+(3, 6, 'Peshawar', 'Pakistan', NULL, 'boi', '2021-06-17 01:39:06', '2021-06-17 01:39:06');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `admin_roles`\
+--\
+\
+CREATE TABLE `admin_roles` (\
+  `adrole_id` int(11) NOT NULL,\
+  `adrole_code` varchar(100) NOT NULL,\
+  `adrole_uuid` varchar(100) NOT NULL,\
+  `adrole_title` varchar(100) NOT NULL,\
+  `adrole_slug` varchar(100) NOT NULL,\
+  `adrole_description` varchar(250) NOT NULL,\
+  `adrole_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `admin_roles`\
+--\
+\
+INSERT INTO `admin_roles` (`adrole_id`, `adrole_code`, `adrole_uuid`, `adrole_title`, `adrole_slug`, `adrole_description`, `adrole_status`, `created_at`, `updated_at`) VALUES\
+(1, '57376674', '098f34f8-aa10-40d0-ad30-3f35caa664fa', 'Aministrator', 'aministrator', 'This user has power of all', 1, '2021-06-03 11:34:21', '2021-06-03 11:34:21'),\
+(2, '25800048', '4646f168-6924-4ea4-934b-c5c6a6844501', 'Data Entry', 'data-entry', 'Team for data entry.', 0, '2021-06-03 23:37:21', '2021-06-16 01:51:40'),\
+(5, '51617464', 'decbf997-3485-4deb-bfe7-c08e4f848792', 'Admin', 'admin', 'this is', 1, '2021-06-15 05:59:28', '2021-06-17 01:36:48');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `admin_users`\
+--\
+\
+CREATE TABLE `admin_users` (\
+  `aduser_id` int(10) NOT NULL,\
+  `aduser_code` varchar(100) NOT NULL,\
+  `aduser_uuid` varchar(100) NOT NULL,\
+  `adfirst_name` varchar(100) NOT NULL,\
+  `adlast_name` varchar(100) NOT NULL,\
+  `aduser_name` varchar(100) NOT NULL,\
+  `password` varchar(200) NOT NULL,\
+  `_hint` varchar(200) NOT NULL,\
+  `remember_token` varchar(100) NOT NULL,\
+  `_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `admin_users`\
+--\
+\
+INSERT INTO `admin_users` (`aduser_id`, `aduser_code`, `aduser_uuid`, `adfirst_name`, `adlast_name`, `aduser_name`, `password`, `_hint`, `remember_token`, `_status`, `created_at`, `updated_at`) VALUES\
+(5, '55854670', '16dfc530-9ae8-4029-afea-f3af6d222fe7', 'Aizaz', 'Khan', 'aizaz@gmail.com', '$2y$10$9S33hWzl6iUjwlsJL5N5HewQcH0ymqycm53d5Z.hWpgLUhwSozzFC', 'eyJpdiI6Im9UMzdHdXVmZlV6R3BhWFRDdlM3N1E9PSIsInZhbHVlIjoiNjlCeHNtSlVSUzI2RzA0M2tpbGZKUT09IiwibWFjIjoiYjFjZDQ1MWUxYzY3NDIxNTMzYWU1YWIyNDUzOWFhZTM3ZDliMmZjMzIyYWNlNjlhNTI1OGI0MjU4MjNmODM3NiJ9', '', 1, '2021-06-14 01:53:03', '2021-06-14 01:53:03'),\
+(6, '76150977', '893de516-1659-4d33-8dff-93c1310b08c0', 'Qasim', 'Ali', 'qasim@admin.com', '$2y$10$.ruyyYIvJupVviW0ZQo1FOyyDT/X3dj3NIk018YI7i.DpEEFzo3C.', 'eyJpdiI6IkYrV0Z0aUxhMTZmZEZ1eVRKbmdNZnc9PSIsInZhbHVlIjoic0JkZWNQMXF6SlJHc3Y4aUszNFhrdz09IiwibWFjIjoiZTk2YWI4YTE1ODIwYWJmMmFmYzg1NjBkN2UwNWE3MTBhMzYzMjdlMWVkZTlhZTAxOWVlMjQxMTU4MWVlOTRlYSJ9', '', 1, '2021-06-17 01:39:06', '2021-06-18 00:53:11');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `adrole_to_links`\
+--\
+\
+CREATE TABLE `adrole_to_links` (\
+  `rolelink_id` int(11) NOT NULL,\
+  `adrole_id` int(11) NOT NULL,\
+  `modulelink_id` int(11) NOT NULL,\
+  `_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `adrole_to_links`\
+--\
+\
+INSERT INTO `adrole_to_links` (`rolelink_id`, `adrole_id`, `modulelink_id`, `_status`, `created_at`, `updated_at`) VALUES\
+(1, 5, 14, 1, '2021-06-17 23:55:42', '2021-06-17 23:55:42'),\
+(4, 5, 17, 1, '2021-06-17 23:56:24', '2021-06-17 23:56:24'),\
+(5, 5, 18, 1, '2021-06-17 23:56:49', '2021-06-17 23:56:49'),\
+(6, 5, 19, 1, '2021-06-17 23:56:49', '2021-06-17 23:56:49'),\
+(8, 1, 16, 1, '2021-06-18 01:23:30', '2021-06-18 01:23:30'),\
+(9, 1, 14, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(10, 1, 15, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(12, 1, 18, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(13, 1, 19, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(14, 2, 15, 1, '2021-06-18 01:26:22', '2021-06-18 01:26:22'),\
+(15, 2, 16, 1, '2021-06-18 01:26:22', '2021-06-18 01:26:22'),\
+(16, 5, 15, 1, '2021-06-18 01:26:43', '2021-06-18 01:26:43'),\
+(17, 5, 16, 1, '2021-06-18 01:26:43', '2021-06-18 01:26:43'),\
+(18, 5, 20, 1, '2021-06-18 12:15:57', '2021-06-18 12:15:57'),\
+(19, 5, 21, 1, '2021-06-18 12:28:55', '2021-06-18 12:28:55'),\
+(20, 5, 23, 1, '2021-06-18 12:28:55', '2021-06-18 12:28:55'),\
+(21, 5, 22, 1, '2021-06-18 12:28:55', '2021-06-18 12:28:55'),\
+(22, 5, 24, 1, '2021-06-19 12:10:28', '2021-06-19 12:10:28'),\
+(23, 5, 25, 1, '2021-06-23 00:47:48', '2021-06-23 00:47:48'),\
+(24, 5, 26, 1, '2021-06-23 05:23:37', '2021-06-23 05:23:37'),\
+(25, 5, 27, 1, '2021-06-23 06:24:41', '2021-06-23 06:24:41'),\
+(26, 5, 28, 1, '2021-06-30 00:23:55', '2021-06-30 00:23:55'),\
+(27, 5, 29, 1, '2021-06-30 00:32:50', '2021-06-30 00:32:50');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `adrole_to_module`\
+--\
+\
+CREATE TABLE `adrole_to_module` (\
+  `rolemodule_id` int(11) NOT NULL,\
+  `adrole_id` int(11) NOT NULL,\
+  `module_id` int(11) NOT NULL,\
+  `_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `adrole_to_module`\
+--\
+\
+INSERT INTO `adrole_to_module` (`rolemodule_id`, `adrole_id`, `module_id`, `_status`, `created_at`, `updated_at`) VALUES\
+(1, 5, 7, 1, '2021-06-17 23:55:42', '2021-06-17 23:55:42'),\
+(3, 5, 5, 1, '2021-06-17 23:56:24', '2021-06-17 23:56:24'),\
+(4, 5, 6, 1, '2021-06-17 23:56:49', '2021-06-17 23:56:49'),\
+(6, 1, 7, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(7, 1, 4, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(9, 1, 6, 1, '2021-06-18 01:24:36', '2021-06-18 01:24:36'),\
+(10, 2, 4, 1, '2021-06-18 01:26:22', '2021-06-18 01:26:22'),\
+(12, 5, 4, 1, '2021-06-18 12:28:55', '2021-06-18 12:28:55'),\
+(13, 5, 8, 1, '2021-06-23 00:47:48', '2021-06-23 00:47:48');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `aduser_to_permission`\
+--\
+\
+CREATE TABLE `aduser_to_permission` (\
+  `userper_id` int(11) NOT NULL,\
+  `aduser_id` int(11) NOT NULL,\
+  `permission_id` int(11) NOT NULL,\
+  `persmission_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `aduser_to_permission`\
+--\
+\
+INSERT INTO `aduser_to_permission` (`userper_id`, `aduser_id`, `permission_id`, `persmission_status`, `created_at`, `updated_at`) VALUES\
+(19, 6, 4, 1, '2021-06-17 01:39:06', '2021-06-17 01:39:06'),\
+(20, 6, 3, 1, '2021-06-17 01:39:06', '2021-06-17 01:39:06'),\
+(24, 5, 1, 1, '2021-06-23 01:12:23', '2021-06-23 01:12:23'),\
+(25, 5, 2, 1, '2021-06-23 01:12:23', '2021-06-23 01:12:23'),\
+(26, 5, 3, 1, '2021-06-23 01:12:23', '2021-06-23 01:12:23'),\
+(27, 5, 4, 1, '2021-06-23 01:12:23', '2021-06-23 01:12:23');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `aduser_to_role`\
+--\
+\
+CREATE TABLE `aduser_to_role` (\
+  `aduserrole_id` int(11) NOT NULL,\
+  `aduser_id` int(11) NOT NULL,\
+  `adrole_id` int(11) NOT NULL,\
+  `adrole_status` int(1) NOT NULL DEFAULT '1',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `aduser_to_role`\
+--\
+\
+INSERT INTO `aduser_to_role` (`aduserrole_id`, `aduser_id`, `adrole_id`, `adrole_status`, `created_at`, `updated_at`) VALUES\
+(6, 6, 1, 1, '2021-06-17 01:39:06', '2021-06-17 01:39:06'),\
+(8, 5, 5, 1, '2021-06-23 01:12:23', '2021-06-23 01:12:23');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `module_to_links`\
+--\
+\
+CREATE TABLE `module_to_links` (\
+  `modulelink_id` int(11) NOT NULL,\
+  `module_id` int(11) NOT NULL,\
+  `link_title` varchar(100) NOT NULL,\
+  `link_val` varchar(255) NOT NULL,\
+  `_visiblity` int(1) NOT NULL DEFAULT '1' COMMENT 'The link should either appear within the menu or not',\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `module_to_links`\
+--\
+\
+INSERT INTO `module_to_links` (`modulelink_id`, `module_id`, `link_title`, `link_val`, `_visiblity`, `created_at`, `updated_at`) VALUES\
+(14, 7, 'Home', 'home', 1, '2021-06-17 01:17:53', '2021-06-17 01:17:53'),\
+(17, 5, 'Manage Roles', 'roles', 1, '2021-06-17 01:18:19', '2021-06-17 01:18:19'),\
+(18, 6, 'Create Member', 'team-mgt/create', 1, '2021-06-17 01:18:27', '2021-06-17 01:18:27'),\
+(19, 6, 'Members List', 'team-mgt', 1, '2021-06-17 01:18:27', '2021-06-17 01:18:27'),\
+(21, 4, 'Create a Module', 'modules-mgt/create', 1, '2021-06-18 12:26:25', '2021-06-18 12:26:25'),\
+(22, 4, 'Modules List', 'modules-mgt', 1, '2021-06-18 12:26:25', '2021-06-18 12:26:25'),\
+(23, 4, 'Module Edit', 'modules-mgt/*/edit', 0, '2021-06-18 12:26:25', '2021-06-18 12:26:25'),\
+(24, 6, 'Member Edit', 'team-mgt/*/edit', 0, '2021-06-19 12:10:08', '2021-06-19 12:10:08'),\
+(25, 8, 'Degree Level', 'degree-level', 1, '2021-06-23 00:47:27', '2021-06-23 00:47:27'),\
+(26, 8, 'Skills', 'skill-mgt', 1, '2021-06-23 05:22:54', '2021-06-23 05:22:54'),\
+(28, 8, 'Fields', 'field-mgt', 1, '2021-06-30 00:23:31', '2021-06-30 00:23:31'),\
+(29, 8, 'Degrees', 'degree-mgt', 1, '2021-06-30 00:31:55', '2021-06-30 00:31:55');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `wq_module`\
+--\
+\
+CREATE TABLE `wq_module` (\
+  `module_id` int(11) NOT NULL,\
+  `module_title` varchar(100) NOT NULL,\
+  `module_slug` varchar(100) NOT NULL,\
+  `_order` int(2) NOT NULL,\
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+  `updated_at` timestamp NULL DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Dumping data for table `wq_module`\
+--\
+\
+INSERT INTO `wq_module` (`module_id`, `module_title`, `module_slug`, `_order`, `created_at`, `updated_at`) VALUES\
+(4, 'Modules', 'modules', 2, '2021-06-16 02:47:04', '2021-06-18 12:26:25'),\
+(5, 'Roles', 'roles', 3, '2021-06-16 02:47:30', '2021-06-17 01:18:19'),\
+(6, 'Team Management', 'team-management', 4, '2021-06-16 02:48:06', '2021-06-17 01:18:27'),\
+(7, 'Home', 'home', 1, '2021-06-17 01:17:53', '2021-06-17 01:17:53'),\
+(8, 'Autocompletes', 'autocompletes', 5, '2021-06-23 00:47:27', '2021-06-23 00:47:27');\
+\
+--\
+-- Indexes for dumped tables\
+--\
+\
+--\
+-- Indexes for table `admin_permission`\
+--\
+ALTER TABLE `admin_permission`\
+  ADD PRIMARY KEY (`permission_id`);\
+\
+--\
+-- Indexes for table `admin_profile`\
+--\
+ALTER TABLE `admin_profile`\
+  ADD PRIMARY KEY (`adprofile_id`),\
+  ADD KEY `aduser_id` (`aduser_id`);\
+\
+--\
+-- Indexes for table `admin_roles`\
+--\
+ALTER TABLE `admin_roles`\
+  ADD PRIMARY KEY (`adrole_id`);\
+\
+--\
+-- Indexes for table `admin_users`\
+--\
+ALTER TABLE `admin_users`\
+  ADD PRIMARY KEY (`aduser_id`);\
+\
+--\
+-- Indexes for table `adrole_to_links`\
+--\
+ALTER TABLE `adrole_to_links`\
+  ADD PRIMARY KEY (`rolelink_id`),\
+  ADD KEY `role_id` (`adrole_id`),\
+  ADD KEY `modulelink_id` (`modulelink_id`);\
+\
+--\
+-- Indexes for table `adrole_to_module`\
+--\
+ALTER TABLE `adrole_to_module`\
+  ADD PRIMARY KEY (`rolemodule_id`),\
+  ADD KEY `adrole_id` (`adrole_id`);\
+\
+--\
+-- Indexes for table `aduser_to_permission`\
+--\
+ALTER TABLE `aduser_to_permission`\
+  ADD PRIMARY KEY (`userper_id`),\
+  ADD KEY `permission_id` (`permission_id`),\
+  ADD KEY `aduser_id` (`aduser_id`);\
+\
+--\
+-- Indexes for table `aduser_to_role`\
+--\
+ALTER TABLE `aduser_to_role`\
+  ADD PRIMARY KEY (`aduserrole_id`);\
+\
+--\
+-- Indexes for table `module_to_links`\
+--\
+ALTER TABLE `module_to_links`\
+  ADD PRIMARY KEY (`modulelink_id`),\
+  ADD KEY `module_id` (`module_id`);\
+\
+--\
+-- Indexes for table `wq_module`\
+--\
+ALTER TABLE `wq_module`\
+  ADD PRIMARY KEY (`module_id`);\
+\
+--\
+-- AUTO_INCREMENT for dumped tables\
+--\
+\
+--\
+-- AUTO_INCREMENT for table `admin_permission`\
+--\
+ALTER TABLE `admin_permission`\
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;\
+\
+--\
+-- AUTO_INCREMENT for table `admin_profile`\
+--\
+ALTER TABLE `admin_profile`\
+  MODIFY `adprofile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;\
+\
+--\
+-- AUTO_INCREMENT for table `admin_roles`\
+--\
+ALTER TABLE `admin_roles`\
+  MODIFY `adrole_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\
+\
+--\
+-- AUTO_INCREMENT for table `admin_users`\
+--\
+ALTER TABLE `admin_users`\
+  MODIFY `aduser_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;\
+\
+--\
+-- AUTO_INCREMENT for table `adrole_to_links`\
+--\
+ALTER TABLE `adrole_to_links`\
+  MODIFY `rolelink_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;\
+\
+--\
+-- AUTO_INCREMENT for table `adrole_to_module`\
+--\
+ALTER TABLE `adrole_to_module`\
+  MODIFY `rolemodule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;\
+\
+--\
+-- AUTO_INCREMENT for table `aduser_to_permission`\
+--\
+ALTER TABLE `aduser_to_permission`\
+  MODIFY `userper_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;\
+\
+--\
+-- AUTO_INCREMENT for table `aduser_to_role`\
+--\
+ALTER TABLE `aduser_to_role`\
+  MODIFY `aduserrole_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;\
+\
+--\
+-- AUTO_INCREMENT for table `module_to_links`\
+--\
+ALTER TABLE `module_to_links`\
+  MODIFY `modulelink_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;\
+\
+--\
+-- AUTO_INCREMENT for table `wq_module`\
+--\
+ALTER TABLE `wq_module`\
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;\
+}
